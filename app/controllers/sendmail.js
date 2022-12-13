@@ -58,6 +58,8 @@ var nodemailer = require('nodemailer');
          html: `<h3> Click on this link to reset your password : ${url} </h3>`,
        });
      };
+     
+    //  Verify Email here 
 
 
      module.exports.verifyemail = async (email, token) => {
