@@ -3,6 +3,13 @@ const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
 const bodyParser= require("body-parser")
 
+// for Password Reset Here 
+
+
+
+
+const ejs= require("ejs")
+
 const app = express();
 
 let corsOptions = {
@@ -19,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-
+app.set('view engine', 'ejs');
 app.use(bodyParser.json())
 
 const db = require("./app/models");
@@ -28,7 +35,9 @@ const Role = db.role;
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+     useCreateIndex: true 
+    
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
@@ -41,7 +50,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Hotel Reservation System Here " });
 });
 
 // routes
@@ -51,9 +60,24 @@ require("./app/routes/hotels.routes")(app);
 require("./app/routes/hotel_res.routes")(app);
 require("./app/routes/hotels_review.routes")(app);
 require("./app/routes/room.routes")(app);
+require("./app/routes/passwordreset.routes")(app);
+
+// Google Login here 
+
+require("./app/routes/google_login.routes")(app);
+
 
 // image path
 app.get("/hotelimage",express.static("./public/hotel_img"))
+
+app.get('/esewa', function(req, res, next) {
+  res.render('esewa');
+});
+
+
+// password reset here 
+
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

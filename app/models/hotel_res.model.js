@@ -14,6 +14,7 @@ const Hotel_reservations = mongoose.model(
     Room_type:Number,
     Hotel_id:String,
     Price:Number,
+    Status:["completed","unpaid","paid"],
     
     
     time : { type: Date, default: (new Date()).getTime(),

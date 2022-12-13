@@ -30,6 +30,26 @@ module.exports = (app) => {
        router.post("/:id", upload.single("Room_image"), rooms.create);
 
 
+      //  Get All Rooms Here 
+       router.get("/", rooms.findall);
+
+
+
+      //  Router Of Esewa
+      router.get("/esewa/:id",rooms.esewa)
+
+
+      // Success Url here 
+      router.get("/success",rooms.success)
+
+
+      // Failed URL Here 
+
+      router.get("/failed",rooms.failed)
+
+    
+
+
        app.use("/api/rooms",router)
 
 

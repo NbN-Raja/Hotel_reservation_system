@@ -11,6 +11,15 @@ const User = mongoose.model(
     password: String,
     phone:Number,
     avatar:String,
+    googleid:String,
+    isVerified: {
+      type: Boolean,
+      default: false,
+  },
+  provider: {
+    type: String,
+    required: true,
+  },
     time : { type: Date, default: (new Date()).getTime()},
     roles: [
       {

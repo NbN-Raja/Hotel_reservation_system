@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+ 
+
+
+  <h1>List Of All Hotels Rooms</h1>
+  <div class="container"> 
+    <% datas.forEach(function(data) { %>
+    <a href="/api/rooms/esewa/<%=data._id %>" style="border:1px solid black"> 
+        <p> <strong><%= data.hotel_id %></strong></p>
+        <>  User id <strong><%= data._id %></strong></p>
+    <i><%= data.Room_price %></i>
+<p>   <%= data.Room_capacity %>,</p>
+<p>      <%= data.Room_foodservices %></p>
+<p>     <%= data.Room_type %></p>
+<p>       <%= data.Room_price %></p>
+<p>         <%= data.Room_capacity %></p>
+<p>        <%= data.Room_foodservices %></p>
+<p>         <%=   data.Room_ac %> </p>
+<p>            <%=  data.Room_images %></p>
+               
+<p>             <%= data.Room_amenities %></p>
+         
+         
+</a>
+<br style="background-color: red"> <hr>
+
+    <% }) %>
+</a>
+</div>
+
+
+
+ 
+<style>
+    
+    .container{
+       border:1px solid black
+    }
+
+    
+</style>
+  
+  
+  
+
+   
+ 
+
+
+
+
+
+</body>
+</html>

@@ -1,11 +1,15 @@
 const config = require("../config/auth.config");
 const db = require("../models");
+const multer = require("multer")
 const { user: User, role: Role, refreshToken: RefreshToken } = db;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
+
+
+// Avatar 
   const user = new User({
     username: req.body.username,
     firstname:req.body.firstname,
@@ -13,7 +17,7 @@ exports.signup = (req, res) => {
     address:req.body.address,
     phone:req.body.phone,
     email: req.body.email,
-    avatar:req.body.avatar,
+    provider:req.body.provider,
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
@@ -151,3 +155,7 @@ exports.refreshToken = async (req, res) => {
     return res.status(500).send({ message: err });
   }
 };
+
+
+// Password Reset here 
+

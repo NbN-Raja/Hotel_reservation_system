@@ -7,6 +7,8 @@ db.mongoose = mongoose;
 
 db.user = require("./user.model");
 db.role = require("./role.model");
+db.resetToken = require("./resetToken.model");
+
 db.hotels = require("./hotels.model").default;
 db.refreshToken = require("./refreshToken.model");
 
