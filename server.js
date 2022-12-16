@@ -9,11 +9,11 @@ const ejs = require("ejs");
 
 const app = express();
 
-// let corsOptions = {
-//   origin: "http://localhost:8081",
-// };
+let corsOptions = {
+  origin: "https://nbn-hotel-reservation-backend.clouds.nepalicloud.com/",
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json());
