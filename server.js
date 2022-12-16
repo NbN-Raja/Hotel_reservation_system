@@ -1,19 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
-const bodyParser= require("body-parser")
+const bodyParser = require("body-parser");
 
-// for Password Reset Here 
+// for Password Reset Here
 
-
-
-
-const ejs= require("ejs")
+const ejs = require("ejs");
 
 const app = express();
 
 let corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8081",
 };
 
 app.use(cors(corsOptions));
@@ -24,34 +21,33 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-
-
-app.set('view engine', 'ejs');
-app.use(bodyParser.json())
+app.set("view engine", "ejs");
+app.use(bodyParser.json());
 
 const db = require("./app/models");
 const Role = db.role;
 
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(`mongodb+srv://admin:OoGjsS8Dv4e8cR5Q@cluster0.cvbnyxo.mongodb.net/test`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-     useCreateIndex: true 
-    
+    useCreateIndex: true,
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Hotel Reservation System Here " });
+  res.send("welcome to Hotel Registration ");
 });
+
+
 
 // routes
 require("./app/routes/auth.routes")(app);
@@ -62,22 +58,18 @@ require("./app/routes/hotels_review.routes")(app);
 require("./app/routes/room.routes")(app);
 require("./app/routes/passwordreset.routes")(app);
 
-// Google Login here 
+// Google Login here
 
 require("./app/routes/google_login.routes")(app);
 
-
 // image path
-app.get("/hotelimage",express.static("./public/hotel_img"))
+app.get("/hotelimage", express.static("./public/hotel_img"));
 
-app.get('/esewa', function(req, res, next) {
-  res.render('esewa');
+app.get("/esewa", function (req, res, next) {
+  res.render("esewa");
 });
 
-
-// password reset here 
-
-
+// password reset here
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -89,8 +81,8 @@ function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
-        name: "user"
-      }).save(err => {
+        name: "user",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -99,8 +91,8 @@ function initial() {
       });
 
       new Role({
-        name: "moderator"
-      }).save(err => {
+        name: "moderator",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }
@@ -109,8 +101,8 @@ function initial() {
       });
 
       new Role({
-        name: "admin"
-      }).save(err => {
+        name: "admin",
+      }).save((err) => {
         if (err) {
           console.log("error", err);
         }

@@ -1,1 +1,43 @@
-[{"time":"2022-11-23T06:45:07.835Z","_id":"637dc303651dfc1f1c930af9","Hotel_name":"nbn","Hotel_image":"../public/hotel_img/1669187031087-three.png","__v":0,"Hotel_phone":455554545465131},{"time":"2022-11-23T06:45:07.835Z","_id":"637dc352651dfc1f1c930afb","Hotel_name":"nbn","Hotel_image":"../public/hotel_img/1669275868479-Capture.JPG","__v":0,"Hotel_phone":455554545465131,"Price":2000},{"time":"2022-11-23T06:45:07.835Z","_id":"637dc451651dfc1f1c930b03","Hotel_name":"nbn","Hotel_image":"../public/hotel_img/1669186842644-three.png","__v":0},{"time":"2022-11-30T09:17:13.358Z","_id":"63871f9ec1c90b13e43bb8fc","Hotel_name":"nabin","Hotel_image":"1669799838712-one.jpeg","Hotel_email":"aaasasasa@gmail.com","__v":0},{"time":"2022-11-30T12:13:48.951Z","_id":"63876737e27cee0d6ce33dff","Hotel_name":"nabin","Hotel_image":"1669818167214-one.jpeg","Hotel_email":"aaasasasa@gmail.com","Mod_id":"","__v":0}]
+[
+  {
+    "time": "2022-11-23T06:45:07.835Z",
+    "_id": "637dc303651dfc1f1c930af9",
+    "Hotel_name": "nbn",
+    "Hotel_image": "../public/hotel_img/1669187031087-three.png",
+    "__v": 0,
+    "Hotel_phone": 455554545465131
+  },
+  {
+    "time": "2022-11-23T06:45:07.835Z",
+    "_id": "637dc352651dfc1f1c930afb",
+    "Hotel_name": "nbn",
+    "Hotel_image": "../public/hotel_img/1669275868479-Capture.JPG",
+    "__v": 0,
+    "Hotel_phone": 455554545465131,
+    "Price": 2000
+  },
+  {
+    "time": "2022-11-23T06:45:07.835Z",
+    "_id": "637dc451651dfc1f1c930b03",
+    "Hotel_name": "nbn",
+    "Hotel_image": "../public/hotel_img/1669186842644-three.png",
+    "__v": 0
+  },
+  {
+    "time": "2022-11-30T09:17:13.358Z",
+    "_id": "63871f9ec1c90b13e43bb8fc",
+    "Hotel_name": "nabin",
+    "Hotel_image": "1669799838712-one.jpeg",
+    "Hotel_email": "aaasasasa@gmail.com",
+    "__v": 0
+  },
+  {
+    "time": "2022-11-30T12:13:48.951Z",
+    "_id": "63876737e27cee0d6ce33dff",
+    "Hotel_name": "nabin",
+    "Hotel_image": "1669818167214-one.jpeg",
+    "Hotel_email": "aaasasasa@gmail.com",
+    "Mod_id": "",
+    "__v": 0
+  }
+]

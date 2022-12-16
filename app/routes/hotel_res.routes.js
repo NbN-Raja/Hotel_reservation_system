@@ -1,32 +1,18 @@
-module.exports=(app)=>{
+module.exports = (app) => {
+  var router = require("express").Router();
+  const hotels_res = require("../controllers/hotel_res.controller.js");
 
-    var router = require("express").Router();
-    
-        const hotels_res = require("../controllers/hotel_res.controller.js");
+  // Book a reservation
+  router.post("/", hotels_res.create);
 
-    // Book a reservation 
-    router.post("/",hotels_res.create)
+  // Get By Id
+  router.get("/:id", hotels_res.getbyid);
 
-    // Get By Id 
-    router.get("/:id",hotels_res.getbyid)
+  // Get All Reservations
+  router.get("/", hotels_res.getall);
 
-    // Get All Reservations 
-    router.get("/",hotels_res.getall)
+  // Update a reservation
+  router.put("/:id", hotels_res.update);
 
-
-    // Update a reservation
-    router.put("/:id",hotels_res.update)
-
-    
-
-    
-  
-
-
-    
-    
-
-    app.use("/api/hotelres", router);
-
-
-}
+  app.use("/api/hotelres", router);
+};

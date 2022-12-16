@@ -1,4 +1,3 @@
-
 // // const { getMaxListeners } = require("../models/user.model");
 
 // const sendEmail = async (email, subject, text) => {

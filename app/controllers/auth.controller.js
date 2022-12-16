@@ -1,23 +1,21 @@
 const config = require("../config/auth.config");
 const db = require("../models");
-const multer = require("multer")
+const multer = require("multer");
 const { user: User, role: Role, refreshToken: RefreshToken } = db;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-
-
-// Avatar 
+  // Avatar
   const user = new User({
     username: req.body.username,
-    firstname:req.body.firstname,
-    lastname:req.body.lastname,
-    address:req.body.address,
-    phone:req.body.phone,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    address: req.body.address,
+    phone: req.body.phone,
     email: req.body.email,
-    provider:req.body.provider,
+    provider: req.body.provider,
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
@@ -45,7 +43,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "User was registered successfully!" });
+            res.render("signin",{ message: "User was registered successfully!" });
           });
         }
       );
@@ -135,17 +133,23 @@ exports.refreshToken = async (req, res) => {
     }
 
     if (RefreshToken.verifyExpiration(refreshToken)) {
-      RefreshToken.findByIdAndRemove(refreshToken._id, { useFindAndModify: false }).exec();
-      
+      RefreshToken.findByIdAndRemove(refreshToken._id, {
+        useFindAndModify: false,
+      }).exec();
+
       res.status(403).json({
         message: "Refresh token was expired. Please make a new signin request",
       });
       return;
     }
 
-    let newAccessToken = jwt.sign({ id: refreshToken.user._id }, config.secret, {
-      expiresIn: config.jwtExpiration,
-    });
+    let newAccessToken = jwt.sign(
+      { id: refreshToken.user._id },
+      config.secret,
+      {
+        expiresIn: config.jwtExpiration,
+      }
+    );
 
     return res.status(200).json({
       accessToken: newAccessToken,
@@ -156,6 +160,4 @@ exports.refreshToken = async (req, res) => {
   }
 };
 
-
-// Password Reset here 
-
+// Password Reset here

@@ -1,31 +1,25 @@
 const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
-const multer= require("multer")
+const multer = require("multer");
 
+// Multer for uplading the avatar
 
-// Multer for uplading the avatar 
-
-
-module.exports = function(app) {
-
-
+module.exports = function (app) {
   const path = require("path");
 
   const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/user_avatar"));
-      },
-      filename: function (req, file, cb) {
-        const name = Date.now() + "-" + file.originalname;
-        cb(null, name);
-      },
-    });
-  
-    const upload = multer({ storage: storage });
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, "../public/user_avatar"));
+    },
+    filename: function (req, file, cb) {
+      const name = Date.now() + "-" + file.originalname;
+      cb(null, name);
+    },
+  });
 
+  const upload = multer({ storage: storage });
 
-
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",
       "x-access-token, Origin, Content-Type, Accept"
@@ -34,23 +28,27 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/api/auth/signup",upload.single("avatar"),
+    "/api/auth/signup",
+    upload.single("avatar"),
     [
       verifySignUp.checkDuplicateUsernameOrEmail,
-      verifySignUp.checkRolesExisted
+      verifySignUp.checkRolesExisted,
     ],
     controller.signup
   );
+
+  app.get("/signup",(req,res)=>{
+    res.render("signup")
+  })
+
+
+  app.get("/signin",(req,res)=>{
+    res.render("signin")
+  })
 
   app.post("/api/auth/signin", controller.signin);
 
   app.post("/api/auth/refreshtoken", controller.refreshToken);
 
-  // Local Password Reser here 
-  
-
-
-  
-
-  
+  // Local Password Reser here
 };

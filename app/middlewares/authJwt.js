@@ -8,11 +8,13 @@ const { TokenExpiredError } = jwt;
 
 const catchError = (err, res) => {
   if (err instanceof TokenExpiredError) {
-    return res.status(401).send({ message: "Unauthorized! Access Token was expired!" });
+    return res
+      .status(401)
+      .send({ message: "Unauthorized! Access Token was expired!" });
   }
 
   return res.sendStatus(401).send({ message: "Unauthorized!" });
-}
+};
 
 const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
@@ -39,7 +41,7 @@ const isAdmin = (req, res, next) => {
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {
@@ -70,7 +72,7 @@ const isModerator = (req, res, next) => {
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {
@@ -95,6 +97,6 @@ const isModerator = (req, res, next) => {
 const authJwt = {
   verifyToken,
   isAdmin,
-  isModerator
+  isModerator,
 };
 module.exports = authJwt;

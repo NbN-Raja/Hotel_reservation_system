@@ -4,10 +4,7 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
- 
   const path = require("path");
-
-  
 
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -24,30 +21,30 @@ module.exports = (app) => {
   // Create a new Tutorial
   router.post("/", upload.single("Hotel_image"), hotels.create);
 
-  // Retrieve all Tutorials
+  // Retrieve all Hotels
   router.get("/", hotels.findAll);
 
-  // Retrieve all published Tutorials
+  // Retrieve all published Hotels
   router.get("/published", hotels.findAllHotels);
 
-  // Retrieve a single Tutorial with id
+  // Retrieve a single Hotelswith id
   router.get("/:id", hotels.findOne);
 
-  // Search with hotel name 
+  // Search with hotel name
 
-  router.post("/:Hotel_name", hotels.findbyname)
+  router.post("/:Hotel_name", hotels.findbyname);
 
-  // Update a Tutorial with id
-  router.put("/:id",upload.single("Hotel_image"), hotels.update);
+  // Update a Hotelswith id
+  router.put("/:id", upload.single("Hotel_image"), hotels.update);
 
-  // Delete a Tutorial with id
+  // Delete a Hotelswith id
   router.delete("/:id", hotels.delete);
 
   // Create a new Tutorial
   router.delete("/", hotels.deleteAll);
 
-  // Review System 
-  router.get("/review",hotels.review)
+  // Review System
+  router.get("/review", hotels.review);
 
   app.use("/api/hotels", router);
 };
