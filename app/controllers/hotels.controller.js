@@ -46,9 +46,7 @@ exports.findAll = (req, res) => {
 
   Hotel.find(condition)
     .then((data) => {
-      res.redirect("hotels",
-      {data:data
-      });
+      res.send(data);
       // res.send(data)
     })
     .catch((err) => {
