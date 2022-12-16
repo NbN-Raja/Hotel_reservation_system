@@ -39,7 +39,21 @@ exports.create = (req, res) => {
 
 // Retrieve all Hotelss from the database.
 exports.findAll = (req, res) => {
+  
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
   const hotel_name = req.query.hotel_name;
+  
   var condition = hotel_name
     ? { hotel_name: { $regex: new RegExp(hotel_name), $options: "i" } }
     : {};
