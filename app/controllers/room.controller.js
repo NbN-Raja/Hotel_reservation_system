@@ -1,6 +1,7 @@
 const db = require("../models");
 const Rooms = require("../models/rooms.model");
 require("./auth.controller");
+require("../models/rooms.model")
 
 exports.create = (req, res) => {
   // Validate request
@@ -17,13 +18,13 @@ exports.create = (req, res) => {
     Room_capacity: req.body.Room_capacity,
     Room_foodservices: req.body.Room_foodservices,
     Room_ac: req.body.Room_ac,
-    Room_images: req.body.Room_images,
+    // Room_images: req.body.Room_images,
     hotel_id: id,
     Room_amenities: req.body.Room_amenities,
   });
 
   // Save Hotelsin the database
-  if ({ id: id }) {
+
     hotels
       .save(hotels)
       .then((data) => {
@@ -35,8 +36,7 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the Tutorial.",
         });
       });
-  } else {
-  }
+  
 };
 
 //  Find All Available rooms of hotels here
@@ -47,10 +47,17 @@ exports.findall = (req, res) => {
     ? { Room_type: { $regex: new RegExp(Room_type), $options: "i" } }
     : {};
 
-  Rooms.find({})
+  Rooms.find({}).populate('reviews')
     .then((data) => {
-      // res.send(data);
-      res.render("room", { datas: data });
+
+      if(!data){
+
+        res.send("Error sending data ")
+      }else{
+        res.send(data);
+      }
+      
+      // res.render("room", { datas: data });
       // console.log(data);
     })
     .catch((err) => {
@@ -70,9 +77,7 @@ exports.esewa = (req, res) => {
       // if (!data)
       //   res.status(404).send({ message: "Not found Hotels with id " + id });
       // else res.send(data);
-      res.render("esewa", {
-        data: data,
-      });
+      res.render(data);
     })
     .catch((err) => {
       res

@@ -16,7 +16,7 @@
     "authorization",
     "mongodb"
   ],
-  "author": "bezkoder",
+  "author": "Nabin",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -24,6 +24,7 @@
     "caprover": "^2.2.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.17.1",
     "express-session": "^1.17.3",
@@ -34,6 +35,8 @@
     "nodemailer": "^6.8.0",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
+    "swagger-jsdoc": "^6.2.7",
+    "swagger-ui-express": "^4.6.0",
     "tailwindcss": "^3.2.4",
     "uuid": "^8.3.2"
   },

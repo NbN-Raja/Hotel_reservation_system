@@ -1,7 +1,15 @@
+require("dotenv").config()
+
 const express = require("express");
 const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
 const bodyParser = require("body-parser");
+const swaggerJsDoc = require("swagger-jsdoc")
+const swaggerUI = require("swagger-ui-express")
+
+// Process Dot env access here 
+
+
 
 // for Password Reset Here
 
@@ -9,11 +17,11 @@ const ejs = require("ejs");
 
 const app = express();
 
-let corsOptions = {
-  origin: "https://nbn-hotel-reservation-backend.clouds.nepalicloud.com/",
-};
+// let corsOptions = {
+//   origin: "https://nbn-hotel-reservation-backend.clouds.nepalicloud.com/",
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -28,10 +36,12 @@ const db = require("./app/models");
 const Role = db.role;
 
 db.mongoose
-  .connect(`mongodb+srv://admin:OoGjsS8Dv4e8cR5Q@cluster0.cvbnyxo.mongodb.net/test`, {
+  .connect(`mongodb://localhost:27017/hotel-reservation`, {
+    
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+     useFindAndModify: false,
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
@@ -41,6 +51,17 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
+  
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://admin:OoGjsS8Dv4e8cR5Q@cluster0.cvbnyxo.mongodb.net/?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
 
 // simple route
 app.get("/", (req, res) => {

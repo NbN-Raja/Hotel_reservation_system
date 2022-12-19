@@ -34,9 +34,8 @@ module.exports = (app) => {
 
   //   Google Main Login With Google here
   const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-  const GOOGLE_CLIENT_ID =
-    "116091919964-gvmuts5ubogp1rqgokorhavltdj7tnlr.apps.googleusercontent.com";
-  const GOOGLE_CLIENT_SECRET = "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";
+  const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+  const GOOGLE_CLIENT_SECRET =process.env.GOOGLE_CLIENT_SECRET;
   passport.use(
     new GoogleStrategy(
       {
@@ -83,54 +82,36 @@ module.exports = (app) => {
               googleid: profile.id,
             });
 
-            user.save((err, user), (req, res) => {
+            user.save((user), (req, res,err) => {
               if (err) {
                 res.status(500).send({ message: err }, user);
                 return;
               }
-              if (req.body.roles) {
-                Role.find(
-                  {
-                    name: { $in: req.body.roles },
-                  },
-                  (err, roles) => {
-                    if (err) {
-                      res.status(500).send({ message: err });
-                      return;
-                    }
+              // if (roles) {
+              //   Role.find(
+              //     {
+              //       name: { $in: req.body.roles },
+              //     },
+              //     (err, roles) => {
+              //       if (err) {
+              //         res.status(500).send({ message: err });
+              //         return;
+              //       }
 
-                    user.roles = roles.map((role) => role._id);
-                    user.save((err) => {
-                      if (err) {
-                        res.status(500).send({ message: err });
-                        return;
-                      }
+                   
 
-                      res.send({
-                        message: "User was registered successfully!",
-                      });
-                    });
-                  }
-                );
-              } else {
-                Role.findOne({ name: "user" }, (err, role) => {
-                  if (err) {
-                    res.status(500).send({ message: err });
-                    return;
-                  }
+              //     user.roles = [role._id];
+              //     user.save((err) => {
+              //       if (err) {
+              //         res.status(500).send({ message: err });
+              //         return;
+              //       }
 
-                  user.roles = [role._id];
-                  user.save((err) => {
-                    if (err) {
-                      res.status(500).send({ message: err });
-                      return;
-                    }
-
-                    res.redirect("success", { user: req.user });
-                  });
-                });
-              }
-
+              //       res.redirect("success", { user: req.user });
+              //     });
+              //   });
+              // }
+              res.redirect("success", { user: req.user });
               return done(null, user);
             });
           }

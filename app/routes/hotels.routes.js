@@ -19,7 +19,7 @@ module.exports = (app) => {
   const upload = multer({ storage: storage });
 
   // Create a new Tutorial
-  router.post("/", upload.single("Hotel_image"), hotels.create);
+  router.post("/:id", upload.single("Hotel_image"), hotels.create);
 
   // Retrieve all Hotels
   router.get("/", hotels.findAll);
@@ -40,11 +40,25 @@ module.exports = (app) => {
   // Delete a Hotelswith id
   router.delete("/:id", hotels.delete);
 
+  // soft delete Data Only Set Deleted at 
+  router.put("/softdelete/:id", hotels.softdelete);
+
+
+
+  // Restore Deleted Data By Moderator Only
+
+  router.put("/restore/:id",hotels.restore)
+
   // Create a new Tutorial
   router.delete("/", hotels.deleteAll);
 
   // Review System
   router.get("/review", hotels.review);
+
+
+  // Delete Hotels and Rooms of that Hotels 
+
+  router.put("/cascadedel/:id",hotels.cascading)
 
   app.use("/api/hotels", router);
 };

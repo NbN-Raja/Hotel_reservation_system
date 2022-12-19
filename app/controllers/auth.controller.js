@@ -43,7 +43,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.render("signin",{ message: "User was registered successfully!" });
+            res.send({ message: "User was registered successfully!" });
           });
         }
       );

@@ -3,7 +3,7 @@
 // const sendEmail = async (email, subject, text) => {
 //     try {
 //         const transporter = nodemailer.createTransport({
-//             host: "bezkoder_db",
+//             host: "nbn",
 //             service: "ashishreddy958@gmail.com",
 //             port: 587,
 //             secure: true,

@@ -2,6 +2,9 @@ const db = require("../models");
 const Hotel = require("../models/hotels.model");
 require("./auth.controller");
 const fs = require("fs");
+const Hotels = require("../models/hotels.model");
+const Rooms = require("../models/rooms.model");
+const { log } = require("console");
 
 // Create and Save a new Hotels
 exports.create = (req, res) => {
@@ -20,7 +23,8 @@ exports.create = (req, res) => {
     // Hotel_image: req.file.filename,
     Hotel_email: req.body.Hotel_email,
     Hotel_phone: req.body.Hotel_phone,
-    Mod_id: req.body.Mod_id,
+    Mod_id: req.params.id,
+    
   });
 
   // Save Hotels in the database
@@ -39,21 +43,26 @@ exports.create = (req, res) => {
 
 // Retrieve all Hotelss from the database.
 exports.findAll = (req, res) => {
-  
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader("Access-Control-Allow-Credentials", true);
   const hotel_name = req.query.hotel_name;
-  
+
   var condition = hotel_name
     ? { hotel_name: { $regex: new RegExp(hotel_name), $options: "i" } }
     : {};
@@ -164,6 +173,92 @@ exports.update = (req, res) => {
     });
 };
 
+// Using Soft
+
+exports.softdelete = (req, res) => {
+  const id = req.params.id;
+
+  
+  Hotel.findByIdAndUpdate(id, [{ $set: { deletedAt: Date.now() } }])
+  
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+        });
+      } else {
+
+       Rooms.findOneAndUpdate({hotel_id:id},{$set:{ deletedAt: Date.now()}})
+       .then((data) => {
+        if (!data) {
+          res.status(404).send({
+            message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+          });
+        } else {
+          
+        }
+      })
+        res.send({
+          message: "Hotels was  successfully Deleted !",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete Hotels with id=" + err,
+      });
+    });
+};
+
+
+// Restore Hotels here 
+
+exports.restore =(req,res)=>{
+
+  const id= req.params.id
+
+  Hotel.findByIdAndUpdate(id, [{ $set: { restoreAt: Date.now() } }])
+  
+  .then((data) => {
+    if (!data) {
+      res.status(404).send({
+        message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+      });
+    } else {
+
+     Rooms.findOneAndUpdate({hotel_id:id},{$set:{ restoreAt: Date.now()}})
+     .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+        });
+      } else {
+        
+      }
+    })
+      res.send({
+        message: "Hotels was  successfully Deleted !",
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message: "Could not delete Hotels with id=" + err,
+    });
+  });
+
+
+
+}
+
+
+
+
+
+
+
+
+
 // Delete a Hotels with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -182,10 +277,11 @@ exports.delete = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete Hotels with id=" + id,
+        message: "Could not delete Hotels with id=" + err,
       });
     });
 };
+
 exports.deleteAll = (req, res) => {
   Hotel.deleteMany({})
     .then((data) => {
@@ -197,6 +293,33 @@ exports.deleteAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all Hotelss.",
+      });
+    });
+};
+
+exports.cascading = (req, res) => {
+
+  const id = req.params.id;
+
+  // Hotel.findOneAndUpdate(id, req.body, {isdeleted: true})
+
+  
+  Rooms.find({hotel_id:id},  [{ $set: { deletedAt: Date.now() } }])
+ 
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+        });
+      } else {
+        res.send({
+          message: "Hotels was  successfully Deleted !",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete Hotels with id=" + err,
       });
     });
 };
