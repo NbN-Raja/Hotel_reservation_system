@@ -187,7 +187,7 @@ exports.softdelete = (req, res) => {
           message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
         });
       } else {
-
+        
        Rooms.findOneAndUpdate({hotel_id:id},{$set:{ deletedAt: Date.now()}})
        .then((data) => {
         if (!data) {
@@ -195,6 +195,8 @@ exports.softdelete = (req, res) => {
             message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
           });
         } else {
+
+          
           
         }
       })
