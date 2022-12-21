@@ -35,7 +35,7 @@ module.exports = (app) => {
   //   Google Main Login With Google here
   const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-  const GOOGLE_CLIENT_SECRET =process.env.GOOGLE_CLIENT_SECRET;
+  const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
   passport.use(
     new GoogleStrategy(
       {
@@ -82,7 +82,7 @@ module.exports = (app) => {
               googleid: profile.id,
             });
 
-            user.save((user), (req, res,err) => {
+            user.save(user, (req, res, err) => {
               if (err) {
                 res.status(500).send({ message: err }, user);
                 return;
@@ -97,8 +97,6 @@ module.exports = (app) => {
               //         res.status(500).send({ message: err });
               //         return;
               //       }
-
-                   
 
               //     user.roles = [role._id];
               //     user.save((err) => {

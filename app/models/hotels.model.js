@@ -27,9 +27,8 @@ const Hotels = mongoose.model(
         ref: "room",
       },
     ],
-    
+
     time: { type: Date, default: new Date().getTime() },
-    
   })
 );
 

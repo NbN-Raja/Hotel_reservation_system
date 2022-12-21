@@ -16,7 +16,7 @@ module.exports = (app) => {
   router.get("/:getallhr", hotels_review.findAllHotelsandreview);
 
   //   // Retrieve a single Hotelswith id
-    // router.get("/:id", hotels_review.findOne);
+  // router.get("/:id", hotels_review.findOne);
 
   // Search with hotel name
 

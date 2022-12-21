@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Schema =mongoose.Schema
+const Schema = mongoose.Schema;
 // Rooms models here
 const Rooms = mongoose.model(
   "room",
@@ -12,7 +12,7 @@ const Rooms = mongoose.model(
     Room_ac: String,
     Room_images: String,
     hotel_id: String,
-    mod_id:String,
+    mod_id: String,
     Room_amenities: [],
     deletedAt: {
       type: Date,
@@ -28,7 +28,6 @@ const Rooms = mongoose.model(
         ref: "Hotel",
       },
     ],
-
 
     // reviews: [{ type: Schema.Types.ObjectId, ref:'reviews' }],
     time: { type: Date, default: new Date().getTime() },

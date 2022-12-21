@@ -1,4 +1,1 @@
-const swaggerOptions = {
-   
-
-}
+const swaggerOptions = {};

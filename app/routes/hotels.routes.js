@@ -40,14 +40,11 @@ module.exports = (app) => {
   // Delete a Hotelswith id
   router.delete("/:id", hotels.delete);
 
-  // soft delete Data Only Set Deleted at 
+  // soft delete Data Only Set Deleted at
   router.put("/softdelete/:id", hotels.softdelete);
 
-
-
   // Restore Deleted Data By Moderator Only
-
-  router.put("/restore/:id",hotels.restore)
+  router.put("/restore/:id", hotels.restore);
 
   // Create a new Tutorial
   router.delete("/", hotels.deleteAll);
@@ -55,10 +52,9 @@ module.exports = (app) => {
   // Review System
   router.get("/review", hotels.review);
 
+  // Delete Hotels and Rooms of that Hotels
 
-  // Delete Hotels and Rooms of that Hotels 
-
-  router.put("/cascadedel/:id",hotels.cascading)
+  router.put("/cascadedel/:id", hotels.cascading);
 
   app.use("/api/hotels", router);
 };

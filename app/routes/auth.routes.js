@@ -37,14 +37,13 @@ module.exports = function (app) {
     controller.signup
   );
 
-  app.get("/signup",(req,res)=>{
-    res.render("signup")
-  })
+  app.get("/signup", (req, res) => {
+    res.render("signup");
+  });
 
-
-  app.get("/signin",(req,res)=>{
-    res.render("signin")
-  })
+  app.get("/signin", (req, res) => {
+    res.render("signin");
+  });
 
   app.post("/api/auth/signin", controller.signin);
 

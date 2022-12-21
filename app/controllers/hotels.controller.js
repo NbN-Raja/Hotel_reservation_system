@@ -24,7 +24,6 @@ exports.create = (req, res) => {
     Hotel_email: req.body.Hotel_email,
     Hotel_phone: req.body.Hotel_phone,
     Mod_id: req.params.id,
-    
   });
 
   // Save Hotels in the database
@@ -178,28 +177,25 @@ exports.update = (req, res) => {
 exports.softdelete = (req, res) => {
   const id = req.params.id;
 
-  
   Hotel.findByIdAndUpdate(id, [{ $set: { deletedAt: Date.now() } }])
-  
+
     .then((data) => {
       if (!data) {
         res.status(404).send({
           message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
         });
       } else {
-        
-       Rooms.findOneAndUpdate({hotel_id:id},{$set:{ deletedAt: Date.now()}})
-       .then((data) => {
-        if (!data) {
-          res.status(404).send({
-            message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
-          });
-        } else {
-
-          
-          
-        }
-      })
+        Rooms.findOneAndUpdate(
+          { hotel_id: id },
+          { $set: { deletedAt: Date.now() } }
+        ).then((data) => {
+          if (!data) {
+            res.status(404).send({
+              message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+            });
+          } else {
+          }
+        });
         res.send({
           message: "Hotels was  successfully Deleted !",
         });
@@ -212,54 +208,41 @@ exports.softdelete = (req, res) => {
     });
 };
 
+// Restore Hotels here
 
-// Restore Hotels here 
-
-exports.restore =(req,res)=>{
-
-  const id= req.params.id
+exports.restore = (req, res) => {
+  const id = req.params.id;
 
   Hotel.findByIdAndUpdate(id, [{ $set: { restoreAt: Date.now() } }])
-  
-  .then((data) => {
-    if (!data) {
-      res.status(404).send({
-        message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
-      });
-    } else {
 
-     Rooms.findOneAndUpdate({hotel_id:id},{$set:{ restoreAt: Date.now()}})
-     .then((data) => {
+    .then((data) => {
       if (!data) {
         res.status(404).send({
           message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
         });
       } else {
-        
+        Rooms.findOneAndUpdate(
+          { hotel_id: id },
+          { $set: { restoreAt: Date.now() } }
+        ).then((data) => {
+          if (!data) {
+            res.status(404).send({
+              message: `Cannot delete Hotels with id=${id}. Maybe Hotels was not found!`,
+            });
+          } else {
+          }
+        });
+        res.send({
+          message: "Hotels was  successfully Deleted !",
+        });
       }
     })
-      res.send({
-        message: "Hotels was  successfully Deleted !",
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete Hotels with id=" + err,
       });
-    }
-  })
-  .catch((err) => {
-    res.status(500).send({
-      message: "Could not delete Hotels with id=" + err,
     });
-  });
-
-
-
-}
-
-
-
-
-
-
-
-
+};
 
 // Delete a Hotels with the specified id in the request
 exports.delete = (req, res) => {
@@ -300,14 +283,12 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.cascading = (req, res) => {
-
   const id = req.params.id;
 
   // Hotel.findOneAndUpdate(id, req.body, {isdeleted: true})
 
-  
-  Rooms.find({hotel_id:id},  [{ $set: { deletedAt: Date.now() } }])
- 
+  Rooms.find({ hotel_id: id }, [{ $set: { deletedAt: Date.now() } }])
+
     .then((data) => {
       if (!data) {
         res.status(404).send({

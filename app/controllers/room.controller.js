@@ -1,7 +1,7 @@
 const db = require("../models");
 const Rooms = require("../models/rooms.model");
 require("./auth.controller");
-require("../models/rooms.model")
+require("../models/rooms.model");
 
 exports.create = (req, res) => {
   // Validate request
@@ -25,18 +25,17 @@ exports.create = (req, res) => {
 
   // Save Hotelsin the database
 
-    hotels
-      .save(hotels)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Tutorial.",
-        });
+  hotels
+    .save(hotels)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Tutorial.",
       });
-  
+    });
 };
 
 //  Find All Available rooms of hotels here
@@ -47,16 +46,15 @@ exports.findall = (req, res) => {
     ? { Room_type: { $regex: new RegExp(Room_type), $options: "i" } }
     : {};
 
-  Rooms.find({}).populate('reviews')
+  Rooms.find({})
+    .populate("reviews")
     .then((data) => {
-
-      if(!data){
-
-        res.send("Error sending data ")
-      }else{
+      if (!data) {
+        res.send("Error sending data ");
+      } else {
         res.send(data);
       }
-      
+
       // res.render("room", { datas: data });
       // console.log(data);
     })
