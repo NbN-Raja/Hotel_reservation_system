@@ -24,7 +24,11 @@ module.exports = (app) => {
   router.post("/:id", upload.single("Room_image"), rooms.create);
 
   //  Get All Rooms Here
-  router.get("/", rooms.findall);
+  router.get("/getall", rooms.getall);
+
+  // Find All Rooms
+   router.get("/getbyid/:id", rooms.getbyid);
+
 
   //  Router Of Esewa
   router.get("/esewa/:id", rooms.esewa);

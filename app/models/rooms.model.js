@@ -10,7 +10,7 @@ const Rooms = mongoose.model(
     Room_capacity: Number,
     Room_foodservices: String,
     Room_ac: String,
-    Room_images: String,
+    // Room_images: String,
     hotel_id: String,
     mod_id: String,
     Room_amenities: [],
@@ -22,12 +22,12 @@ const Rooms = mongoose.model(
       type: Date,
       default: null,
     },
-    hotels: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Hotel",
-      },
-    ],
+    // hotels: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Hotel",
+    //   },
+    // ],
 
     // reviews: [{ type: Schema.Types.ObjectId, ref:'reviews' }],
     time: { type: Date, default: new Date().getTime() },

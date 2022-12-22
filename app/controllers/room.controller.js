@@ -12,7 +12,7 @@ exports.create = (req, res) => {
 
   const id = req.params.id;
   // Create a Tutorial
-  const hotels = new Rooms({
+  const rooms = new Rooms({
     Room_type: req.body.Room_type,
     Room_price: req.body.Room_price,
     Room_capacity: req.body.Room_capacity,
@@ -24,9 +24,9 @@ exports.create = (req, res) => {
   });
 
   // Save Hotelsin the database
-
-  hotels
-    .save(hotels)
+if(id){
+  rooms
+    .save(rooms)
     .then((data) => {
       res.send(data);
     })
@@ -36,34 +36,57 @@ exports.create = (req, res) => {
           err.message || "Some error occurred while creating the Tutorial.",
       });
     });
-};
+}else{
+
+  res.send("Error Occure")
+}
+
+}
 
 //  Find All Available rooms of hotels here
 
-exports.findall = (req, res) => {
-  const Room_type = req.query.hotel_name;
-  var condition = Room_type
-    ? { Room_type: { $regex: new RegExp(Room_type), $options: "i" } }
-    : {};
-
+exports.getall = (req, res) => {
+  
   Rooms.find({})
-    .populate("reviews")
     .then((data) => {
-      if (!data) {
-        res.send("Error sending data ");
-      } else {
-        res.send(data);
-      }
-
-      // res.render("room", { datas: data });
-      // console.log(data);
+      res.send(data);
+      // res.send(data)
+      console.log(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving Hotels.",
+        message: err.message || "Some error occurred while retrieving Hotelss.",
       });
     });
 };
+
+
+// Get Rooms By ID 
+
+exports.getbyid=(req,res)=>{
+
+  const id = req.params.id;
+
+   
+  Rooms.find({hotel_id:id})
+    .then((data) => {
+      
+      if (!data)
+        res.status(404).send({ message: "Not found Room with id " + id });
+      else
+     
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Rooms with id=" + err });
+    });
+
+}
+
+
+
 
 // Esewa Here
 
