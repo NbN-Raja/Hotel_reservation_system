@@ -91,7 +91,7 @@ exports.checkout=(req,res)=>{
   const id = req.params.id;
 
    
-  Rooms.find({hotel_id:id})
+  Rooms.find({_id:id})
     .then((data) => {
       
       if (!data)
