@@ -109,7 +109,7 @@ module.exports = (app) => {
               //     });
               //   });
               // }
-              res.redirect("success", { user: req.user });
+              res.redirect("success", { user: req.id });
               return done(null, user);
             });
           }

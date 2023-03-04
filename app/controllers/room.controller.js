@@ -84,6 +84,29 @@ exports.getbyid=(req,res)=>{
     });
 
 }
+// Get Rooms By ID 
+
+exports.checkout=(req,res)=>{
+
+  const id = req.params.id;
+
+   
+  Rooms.find({hotel_id:id})
+    .then((data) => {
+      
+      if (!data)
+        res.status(404).send({ message: "Not found Room with id " + id });
+      else
+     
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Rooms with id=" + err });
+    });
+
+}
 
 
 

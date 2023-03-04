@@ -19,7 +19,7 @@ module.exports = (app) => {
   const upload = multer({ storage: storage });
 
   // Create a new Tutorial
-  router.post("/:id", upload.single("Hotel_image"), hotels.create);
+  router.post("/create/:id", upload.single("Hotel_image"), hotels.create);
 
   // Retrieve all Hotels
   router.get("/", hotels.findAll);

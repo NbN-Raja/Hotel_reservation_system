@@ -29,6 +29,10 @@ module.exports = (app) => {
   // Find All Rooms
    router.get("/getbyid/:id", rooms.getbyid);
 
+  //  Check Out Rooms 
+
+  router.get("/checkout/:id", rooms.checkout);
+
 
   //  Router Of Esewa
   router.get("/esewa/:id", rooms.esewa);

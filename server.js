@@ -71,6 +71,7 @@ require("./app/routes/hotel_res.routes")(app);
 require("./app/routes/hotels_review.routes")(app);
 require("./app/routes/room.routes")(app);
 require("./app/routes/passwordreset.routes")(app);
+require("./app/routes/moddash.routes")(app);
 
 // Google Login here
 
