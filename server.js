@@ -19,7 +19,7 @@ const app = express();
 //   origin: "https://nbn-hotel-reservation-backend.clouds.nepalicloud.com/",
 // };
 
-// app.use(cors());
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
