@@ -15,9 +15,9 @@ const ejs = require("ejs");
 
 const app = express();
 
-let corsOptions = {
-  origin: "https://nbn-hotel-reservation-backend.clouds.nepalicloud.com/",
-};
+// let corsOptions = {
+//   origin: "https://nbn-hotel-reservation-backend.clouds.nepalicloud.com/",
+// };
 
 app.use(cors());
 
