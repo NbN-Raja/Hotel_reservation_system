@@ -5,6 +5,7 @@ const fs = require("fs");
 const Hotels = require("../models/hotels.model");
 const Rooms = require("../models/rooms.model");
 const { log } = require("console");
+const { mongoose } = require("mongoose");
 
 // Create and Save a new Hotels
 exports.create = (req, res) => {
@@ -93,6 +94,27 @@ exports.findOne = (req, res) => {
         .status(500)
         .send({ message: "Error retrieving Hotels with id=" + id });
     });
+};
+
+// Modertor Find By id 
+exports.findbyid = (req, res) => {
+  const id = req.params.id;
+
+
+
+  Hotel.find({ Mod_id: id  })
+  .then((data) => {
+    if (data.length === 0) {
+      res.status(404).send({ message: "Not found Hotels with id " + id });
+    } else {
+      res.send(data);
+     
+    }
+  })
+  .catch((err) => {
+    res.status(500).send({ message: "Error retrieving Hotels with id=" + err });
+  });
+
 };
 
 exports.findAllHotels = (req, res) => {

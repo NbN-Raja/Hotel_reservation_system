@@ -24,6 +24,9 @@ module.exports = (app) => {
   // Retrieve all Hotels
   router.get("/", hotels.findAll);
 
+  // Find By Hotels Moderator 
+  router.get("/mod/:id", hotels.findbyid);
+
   // Retrieve all published Hotels
   router.get("/published", hotels.findAllHotels);
 
