@@ -115,6 +115,8 @@ exports.signin = (req, res) => {
         refreshToken: refreshToken,
         firstname: user.firstname,
         lastname: user.lastname,
+        address: user.address,
+        phone: user.phone,
       });
     });
 };
