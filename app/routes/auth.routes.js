@@ -47,6 +47,9 @@ module.exports = function (app) {
 
   app.post("/api/auth/signin", controller.signin);
 
+  // Get all user details here 
+  app.get("/api/auth/userdetail/:id", controller.userdetail);
+
   app.post("/api/auth/refreshtoken", controller.refreshToken);
 
   // Local Password Reser here

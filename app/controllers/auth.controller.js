@@ -161,3 +161,23 @@ exports.refreshToken = async (req, res) => {
 };
 
 // Password Reset here
+
+
+exports.userdetail = (req, res) => {
+const id= req.params.id
+  User.findById({_id:id})
+  .then((data) => {
+    if (!data) {
+      res.status(404).send({
+        message: `id=${id}. Maybe user was not found!`,
+      });
+    } else {
+      res.send(data);
+    }
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message: "Could not Find User  with id=" + err,
+    });
+  });
+};

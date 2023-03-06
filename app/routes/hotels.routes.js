@@ -35,6 +35,7 @@ module.exports = (app) => {
 
   // Search with hotel name
 
+  // asd
   router.post("/", hotels.findbyname);
 
   // Update a Hotelswith id
