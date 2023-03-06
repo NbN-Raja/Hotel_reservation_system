@@ -95,7 +95,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      let token = jwt.sign({ id: user.id }, config.secret, {
+      let token = jwt.sign({ id: user.id,email: user.email, firstname:user.firstname,lastname:user.lastname }, config.secret, {
         expiresIn: config.jwtExpiration,
       });
 
@@ -113,6 +113,8 @@ exports.signin = (req, res) => {
         roles: authorities,
         accessToken: token,
         refreshToken: refreshToken,
+        firstname: user.firstname,
+        lastname: user.lastname,
       });
     });
 };
