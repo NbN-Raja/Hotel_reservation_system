@@ -35,7 +35,7 @@ module.exports = (app) => {
 
   // Search with hotel name
 
-  router.post("/:Hotel_name", hotels.findbyname);
+  router.post("/", hotels.findbyname);
 
   // Update a Hotelswith id
   router.put("/:id", upload.single("Hotel_image"), hotels.update);
