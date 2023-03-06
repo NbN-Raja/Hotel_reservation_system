@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     Room_capacity: req.body.Room_capacity,
     Room_foodservices: req.body.Room_foodservices,
     Room_ac: req.body.Room_ac,
-    // Room_images: req.body.Room_images,
+    Room_images: req.body.Room_images,
     hotel_id: id,
     Room_amenities: req.body.Room_amenities,
   });
