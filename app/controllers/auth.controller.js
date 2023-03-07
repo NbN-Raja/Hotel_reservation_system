@@ -12,6 +12,7 @@ exports.signup = (req, res) => {
     username: req.body.username,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    gender: req.body.gender,
     address: req.body.address,
     phone: req.body.phone,
     email: req.body.email,
@@ -43,7 +44,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "User was registered successfully!" });
+            res.send(user);
           });
         }
       );
@@ -61,7 +62,7 @@ exports.signup = (req, res) => {
             return;
           }
 
-          res.send({ message: "User was registered successfully!" });
+          res.send(user);
         });
       });
     }
@@ -106,7 +107,7 @@ exports.signin = (req, res) => {
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
-      res.status(200).send({
+      res.status(200).send({user,
         id: user._id,
         username: user.username,
         email: user.email,
@@ -117,6 +118,7 @@ exports.signin = (req, res) => {
         lastname: user.lastname,
         address: user.address,
         phone: user.phone,
+        gender: user.gender,
       });
     });
 };
