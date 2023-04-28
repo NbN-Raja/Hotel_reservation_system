@@ -23,8 +23,12 @@ module.exports = (app) => {
 
   router.post("/:id", upload.single("Room_image"), rooms.create);
 
+  // 
+
   //  Get All Rooms Here
   router.get("/getall", rooms.getall);
+
+
 
   // Find All Rooms
    router.get("/getbyid/:id", rooms.getbyid);
@@ -44,5 +48,5 @@ module.exports = (app) => {
 
   router.get("/failed", rooms.failed);
 
-  app.use("/api/rooms", router);
+  app.use("/v2/api/rooms", router);
 };

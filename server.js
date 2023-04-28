@@ -63,6 +63,10 @@ app.get("/", (req, res) => {
   res.send("welcome to Hotel Registration ");
 });
 
+app.get("/neraj",(req,res)=>{
+  res.render("esewa")
+})
+
 // routes
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);

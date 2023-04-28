@@ -14,5 +14,5 @@ module.exports = (app) => {
   // Update a reservation
   router.put("/:id", hotels_res.update);
 
-  app.use("/api/hotelres", router);
+  app.use("/v2/api/hotelres", router);
 };

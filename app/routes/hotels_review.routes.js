@@ -34,7 +34,7 @@ module.exports = (app) => {
   //   // Review System
   //   router.get("/review",hotels_review.review)
 
-  app.use("/hotelreview", router);
+  app.use("/v2/hotelreview", router);
 };
 
 // Image Upload Here

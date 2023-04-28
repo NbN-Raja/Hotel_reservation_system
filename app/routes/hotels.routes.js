@@ -60,7 +60,7 @@ module.exports = (app) => {
 
   router.put("/cascadedel/:id", hotels.cascading);
 
-  app.use("/api/hotels", router);
+  app.use("/v2/api/hotels", router);
 };
 
 // Image Upload Here
